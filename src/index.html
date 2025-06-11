@@ -55,7 +55,7 @@
                                 <button type="button" class="btn btn-light mt-2 border w-100">6</button>
                             </div>
                             <div class="col-3 p-3">
-                                <button type="button" class="btn btn-light mt-2 border w-100">*</button>
+                                <button type="button" class="btn btn-light mt-2 border w-100">x</button>
                             </div>
                         </div>
                         <div class="row gx-1">
@@ -98,6 +98,17 @@
                 console.log(display);
                 const buttons = document.getElementsByClassName("btn");
                 let currentValue = "";
+
+                function evaluateResult() {
+                    const convertedValue = currentValue.replace("x","*")
+                    const result = eval(convertedValue);
+                    currentValue = result;
+                    currentValue = result.toString();
+                    display.value = currentValue;
+                }
+
+
+
                 for (let i=0; i<buttons.length; i++) {
                     const button = buttons[i];
                     button.addEventListener('click',function() {
@@ -105,6 +116,8 @@
                         if (value == 'AC') {
                             currentValue = "";
                             display.value = currentValue;
+                        }else if(value == '='){
+                            evaluateResult();
                         }
                         else{
                             currentValue+=value;
