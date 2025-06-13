@@ -12,6 +12,10 @@
                                                     .replace('Cos','Math.cos')
                                                     .replace('π','Math.PI')
                                                     .replace('ln','Math.log')
+                                                    .replace('e','Math.E')
+                                                    .replace('Tan','Math.tan')
+                                                    .replace('√','Math.sqrt')
+                                                    .replace('log','Math.log10')
                     const result = eval(convertedValue);
                     currentValue = result;
                     currentValue = result.toString();
@@ -24,16 +28,23 @@
                     const button = buttons[i];
                     button.addEventListener('click',function() {
                         const value = button.innerText;
-                        if (value == 'AC') {
-                            currentValue = "";
-                            display.value = currentValue;
-                        }else if(value == '='){
-                            evaluateResult();
+                        try {
+                            if (value == 'AC') {
+                                currentValue = "";
+                                display.value = currentValue;
+                            }else if(value == '='){
+                                evaluateResult();
+                            }
+                            else{
+                                currentValue+=value;
+                                display.value = currentValue;
+                            }
                         }
-                        else{
-                            currentValue+=value;
-                            display.value = currentValue;
+                        catch(error) {
+                            currentValue = 'ERROR'
+                            display.value = currentValue
                         }
+                        
 
                     })
                 }
